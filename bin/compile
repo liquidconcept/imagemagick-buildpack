@@ -46,4 +46,4 @@ rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/gems/rmagick-*
 rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/specifications/rmagick-*
 
 export PATH=:/app/vendor/imagemagick/bin:/app/vendor/imagemagick/im/bin:/app/bin:/local/bin:$PATH
-export CFLAGS=-fopenmp -I/app/vendor/imagemagick/include/ImageMagick-6 CPPFLAGS=-fopenmp -I/app/vendor/imagemagick/include/ImageMagick-6 LDFLAGS=-fopenmp -I/app/vendor/imagemagick/include/ImageMagick-6
+export CFLAGS="-fopenmp -I/app/vendor/imagemagick/include/ImageMagick-6" CPPFLAGS="-fopenmp -I/app/vendor/imagemagick/include/ImageMagick-6" LDFLAGS="-fopenmp -I/app/vendor/imagemagick/include/ImageMagick-6"
