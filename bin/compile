@@ -22,6 +22,7 @@ function puts-step (){
 # ## Build Time
 #
 # Switch to the repo's context.
+mkdir -p $BUILD_DIR/vendor/imagemagick
 cd $BUILD_DIR/vendor/imagemagick
 
 IM_LOCATION="im"
