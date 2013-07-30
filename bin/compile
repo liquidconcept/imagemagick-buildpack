@@ -40,4 +40,11 @@ UFRAW_URL="https://assets.tandemstock.com.s3.amazonaws.com/ufraw-0.19.tar.gz"
 puts-step "Bundling ufraw version $UFRAW_VERSION"
 curl --silent --max-time 60 --location "$UFRAW_URL" | tar xz -C $IM_LOCATION
 
+# remove imagemagick from gems
+cd ~/vendor/bundle/ruby/1.9.1/gems
+ls | grep -P "rmagick-.*" | xargs rm -rf
+
+cd ../specifications
+ls | grep -P "rmagick-.*" | xargs rm -rf
+
 export PATH=:/app/im/bin:/local/bin:$PATH
