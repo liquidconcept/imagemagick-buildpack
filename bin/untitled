@@ -1,0 +1,25 @@
+      puts '-----------Rmagick options-----------'
+      puts 'PATH = '
+      system 'echo $PATH'
+
+      puts 'imagemagick version'
+      system 'convert --version'
+
+      puts 'convert path = '
+      system 'which convert'
+
+      puts 'Magick-config version'
+      system 'Magick-config --version'
+
+      puts 'Magick_config path = '
+      system 'which Magick_config'
+
+      puts 'CFLAGS = '
+      system 'Magick-config --cflags'
+
+      puts 'CPPFLAGS = '
+      system 'Magick-config --cppflags'
+
+      puts 'LIBS = '
+      system 'Magick-config --libs'
+      puts '-------------------------------------'

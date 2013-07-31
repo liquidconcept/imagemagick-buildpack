@@ -48,15 +48,14 @@ curl --silent --max-time 60 --location "$UFRAW_URL" | tar xz -C $IM_LOCATION
 
 # remove imagemagick from gems cache
 rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/gems/rmagick-*
+rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/cache/rmagick-*
 rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/specifications/rmagick-*
 
-echo "export PATH=$BUILD_DIR/bin:/app/vendor/imagemagick/bin:/app/vendor/imagemagick/im/bin:$PATH
-export CFLAGS=\"-fopenmp -I$BUILD_DIR/vendor/imagemagick/include/ImageMagick-6 $CFLAGS\"
-export CPPFLAGS=\"-fopenmp -I$BUILD_DIR/vendor/imagemagick/include/ImageMagick-6 $CPPFLAGS\"
-export LDFLAGS=\"-L$BUILD_DIR/vendor/imagemagick/lib $LDFLAGS\"
-export LIBS=\"-L$BUILD_DIR/vendor/imagemagick/lib\"
-export LD_LIBRARY_PATH=$BUILD_DIR/vendor/imagemagick/lib/
+echo $PKG_CONFIG_PATH
+
+echo "export LD_LIBRARY_PATH=$BUILD_DIR/vendor/imagemagick/lib/
 export PKG_CONFIG_PATH=$BUILD_DIR/vendor/imagemagick/lib/pkgconfig/" > $ROOT_DIR/.set_env_after_compile
 
 mkdir -p $BUILD_DIR/.profile.d
-echo "export PATH=:/app/vendor/imagemagick/bin:/app/vendor/imagemagick/im/bin:$PATH" > $BUILD_DIR/.profile.d/imagemagick.sh
+echo "export PATH=:/app/vendor/imagemagick/bin:/app/vendor/imagemagick/im/bin:$PATH
+export LD_RUN_PATH=/app/vendor/imagemagick/lib" > $BUILD_DIR/.profile.d/imagemagick.sh
