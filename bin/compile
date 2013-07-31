@@ -34,7 +34,6 @@ IM_VERSION="6.8.6-6"
 IM_URL="https://assets.tandemstock.com.s3.amazonaws.com/im-$IM_VERSION.tar.gz"
 puts-step "Bundling ImageMagick version $IM_VERSION"
 curl --silent --max-time 120 --location "$IM_URL" | tar xz
-cp bin/convert /usr/bin/convert
 
 # ufraw dependency
 UFRAW_VERSION="0.19"
@@ -49,7 +48,8 @@ rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/specifications/rmagick-*
 echo "export PATH=:/app/vendor/imagemagick/bin:/app/vendor/imagemagick/im/bin:$PATH
 export CFLAGS=\"-fopenmp -I/app/vendor/imagemagick/include/ImageMagick-6 $CFLAGS\"
 export CPPFLAGS=\"-fopenmp -I/app/vendor/imagemagick/include/ImageMagick-6 $CPPFLAGS\"
-export LDFLAGS=\"-fopenmp -I/app/vendor/imagemagick/include/ImageMagick-6 $LDFLAGS\"" > $ROOT_DIR/.set_env_after_compile
+export LDFLAGS=\"-L/app/vendor/imagemagick/lib $LDFLAGS\"
+export LIBS=\"-Lapp/vendor/imagemagick/lib\"" > $ROOT_DIR/.set_env_after_compile
 
 mkdir -p $BUILD_DIR/.profile.d
 echo "export PATH=:/app/vendor/imagemagick/bin:/app/vendor/imagemagick/im/bin:$PATH" > $BUILD_DIR/.profile.d/imagemagick.sh
