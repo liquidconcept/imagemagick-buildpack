@@ -49,7 +49,7 @@ curl --silent --max-time 60 --location "$UFRAW_URL" | tar xz -C $IM_LOCATION
 rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/gems/rmagick-*
 rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/specifications/rmagick-*
 
-echo "export PATH=:/app/vendor/imagemagick/bin:/app/vendor/imagemagick/im/bin:$PATH
+echo "export PATH=/app/bin:/app/vendor/imagemagick/bin:/app/vendor/imagemagick/im/bin:$PATH
 export CFLAGS=\"-fopenmp -I/app/vendor/imagemagick/include/ImageMagick-6 $CFLAGS\"
 export CPPFLAGS=\"-fopenmp -I/app/vendor/imagemagick/include/ImageMagick-6 $CPPFLAGS\"
 export LDFLAGS=\"-L/app/vendor/imagemagick/lib $LDFLAGS\"
