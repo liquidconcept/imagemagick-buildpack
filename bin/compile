@@ -37,8 +37,8 @@ curl --silent --max-time 120 --location "$IM_URL" | tar xz
 
 #linking convert in the bin of app
 mkdir -p $BUILD_DIR/bin
-ln -s bin/convert $BUILD_DIR/bin/convert
-ln -s bin/Magick-config $BUILD_DIR/bin/Magick-config
+ln -s ../vendor/imagemagick/bin/convert $BUILD_DIR/bin/convert
+ln -s ../vendor/imagemagick/bin/Magick-config $BUILD_DIR/bin/Magick-config
 if [ -e $BUILD_DIR/bin/Magick-config ]; then
   echo 'well linked!!!'
 fi
