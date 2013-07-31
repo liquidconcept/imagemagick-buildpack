@@ -49,7 +49,9 @@ echo "export PATH=:/app/vendor/imagemagick/bin:/app/vendor/imagemagick/im/bin:$P
 export CFLAGS=\"-fopenmp -I/app/vendor/imagemagick/include/ImageMagick-6 $CFLAGS\"
 export CPPFLAGS=\"-fopenmp -I/app/vendor/imagemagick/include/ImageMagick-6 $CPPFLAGS\"
 export LDFLAGS=\"-L/app/vendor/imagemagick/lib $LDFLAGS\"
-export LIBS=\"-Lapp/vendor/imagemagick/lib\"" > $ROOT_DIR/.set_env_after_compile
+export LIBS=\"-Lapp/vendor/imagemagick/lib\"
+export LD_LIBRARY_PATH=/app/vendor/imagemagick/lib
+export PKG_CONFIG_PATH=/app/vendor/imagemagick/lib/pkgconfig/" > $ROOT_DIR/.set_env_after_compile
 
 mkdir -p $BUILD_DIR/.profile.d
 echo "export PATH=:/app/vendor/imagemagick/bin:/app/vendor/imagemagick/im/bin:$PATH" > $BUILD_DIR/.profile.d/imagemagick.sh
