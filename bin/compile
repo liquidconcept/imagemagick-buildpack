@@ -34,6 +34,7 @@ IM_VERSION="6.8.6-6"
 IM_URL="https://assets.tandemstock.com.s3.amazonaws.com/im-$IM_VERSION.tar.gz"
 puts-step "Bundling ImageMagick version $IM_VERSION"
 curl --silent --max-time 120 --location "$IM_URL" | tar xz
+cp bin/convert /usr/bin/convert
 
 # ufraw dependency
 UFRAW_VERSION="0.19"
