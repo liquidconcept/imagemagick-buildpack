@@ -35,6 +35,10 @@ IM_URL="https://assets.tandemstock.com.s3.amazonaws.com/im-$IM_VERSION.tar.gz"
 puts-step "Bundling ImageMagick version $IM_VERSION"
 curl --silent --max-time 120 --location "$IM_URL" | tar xz
 
+#linking convert in the bin of app
+mkdir -p $BUILD_DIR/bin
+ln -s bin/convert $BUILD_DIR/bin/convert
+
 # ufraw dependency
 UFRAW_VERSION="0.19"
 UFRAW_URL="https://assets.tandemstock.com.s3.amazonaws.com/ufraw-0.19.tar.gz"
@@ -50,7 +54,7 @@ export CFLAGS=\"-fopenmp -I/app/vendor/imagemagick/include/ImageMagick-6 $CFLAGS
 export CPPFLAGS=\"-fopenmp -I/app/vendor/imagemagick/include/ImageMagick-6 $CPPFLAGS\"
 export LDFLAGS=\"-L/app/vendor/imagemagick/lib $LDFLAGS\"
 export LIBS=\"-Lapp/vendor/imagemagick/lib\"
-export LD_LIBRARY_PATH=/app/vendor/imagemagick/lib
+export LD_LIBRARY_PATH=/app/vendor/imagemagick/lib/
 export PKG_CONFIG_PATH=/app/vendor/imagemagick/lib/pkgconfig/" > $ROOT_DIR/.set_env_after_compile
 
 mkdir -p $BUILD_DIR/.profile.d
