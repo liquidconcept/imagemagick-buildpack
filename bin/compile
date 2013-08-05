@@ -31,7 +31,7 @@ mkdir -p $IM_LOCATION
 
 # Install ImageMagick
 IM_VERSION="6.8.6-6"
-IM_URL="http://imagemagick-build-server.herokuapp.com/output/e4e1ded3-9344-4cfa-8409-5c2e7cf692d0"
+IM_URL="http://jpm-guides-staging.s3.amazonaws.com/ImageMagick-build.tar.gz"
 puts-step "Bundling ImageMagick version $IM_VERSION"
 curl --silent --max-time 120 --location "$IM_URL" | tar xz
 
