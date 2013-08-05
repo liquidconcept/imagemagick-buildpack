@@ -33,7 +33,7 @@ mkdir -p $IM_LOCATION
 IM_VERSION="6.8.6-6"
 IM_URL="http://imagemagick-build-server.herokuapp.com/output/622088d2-630b-4f40-af7b-8b7f34eb74f5"
 puts-step "Bundling ImageMagick version $IM_VERSION"
-curl --silent --max-time 120 --location "$IM_URL" | tar xfz
+curl --silent --max-time 120 --location "$IM_URL" | tar xz
 
 #linking convert in the bin of app
 mkdir -p $BUILD_DIR/bin
