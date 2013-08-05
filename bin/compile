@@ -51,4 +51,8 @@ rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/gems/rmagick-*
 rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/cache/rmagick-*
 rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/specifications/rmagick-*
 
-echo "export PKG_CONFIG_PATH=$BUILD_DIR/vendor/imagemagick/lib/pkgconfig/" > $ROOT_DIR/.set_env
+echo "export PATH=$BUILD_DIR/bin:/app/vendor/imagemagick/bin:/app/vendor/imagemagick/im/bin:$PATH
+export PKG_CONFIG_PATH=$BUILD_DIR/vendor/imagemagick/lib/pkgconfig/" > $ROOT_DIR/.set_env
+
+mkdir -p $BUILD_DIR/.profile.d
+echo "export PATH=:/app/vendor/imagemagick/bin:/app/vendor/imagemagick/im/bin:$PATH" > $BUILD_DIR/.profile.d/imagemagick.sh
