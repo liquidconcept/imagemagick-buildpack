@@ -50,3 +50,5 @@ curl --silent --max-time 60 --location "$UFRAW_URL" | tar xz -C $IM_LOCATION
 rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/gems/rmagick-*
 rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/cache/rmagick-*
 rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/specifications/rmagick-*
+
+echo "export PKG_CONFIG_PATH=$BUILD_DIR/vendor/imagemagick/lib/pkgconfig/" > $ROOT_DIR/.set_env
