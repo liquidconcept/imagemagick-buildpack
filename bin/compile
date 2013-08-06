@@ -60,4 +60,5 @@ export LD_LIBRARY_PATH=$BUILD_DIR/vendor/imagemagick/lib/
 export PKG_CONFIG_PATH=$BUILD_DIR/vendor/imagemagick/lib/pkgconfig/" > $ROOT_DIR/.set_env
 
 mkdir -p $BUILD_DIR/.profile.d
-echo "export PATH=:/app/vendor/imagemagick/bin:/app/vendor/imagemagick/im/bin:$PATH" > $BUILD_DIR/.profile.d/imagemagick.sh
+echo "export PATH=:/app/vendor/imagemagick/bin:/app/vendor/imagemagick/im/bin:$PATH
+export LD_LIBRARY_PATH=/app/vendor/imagemagick/lib/" > $BUILD_DIR/.profile.d/imagemagick.sh
