@@ -1,0 +1,4 @@
+
+Build image magick for vulcan :
+
+vulcan build -v -s ./ImageMagick-6.8.6-7 -c "./configure  '--prefix=/app/vendor/ImageMagick-6.8' '--mandir=/app/vendor/ImageMagick-6.8/share/man' '--infodir=/app/vendor/ImageMagick-6.8/share/info' '--with-gs-font-dir=/usr/share/fonts/type1/gsfonts' '--with-magick-plus-plus' '--with-djvu' '--enable-shared' '--without-dps' '--without-fpx' '--with-perl-options=INSTALLDIRS=vendor' '--x-includes=/usr/include/X11' '--x-libraries=/usr/lib/X11' 'CFLAGS=-g -O2' 'LDFLAGS=-Wl,-Bsymbolic-functions' 'CPPFLAGS=' 'CXXFLAGS=-g -O2' && make install"
