@@ -31,7 +31,8 @@ mkdir -p $IM_LOCATION
 
 # Install ImageMagick
 IM_VERSION="6.8.6-6"
-IM_URL="http://jpm-guides-staging.s3.amazonaws.com/ImageMagick-build.tar.gz"
+IM_BUILD="1"
+IM_URL="http://jpm-guides-staging.s3.amazonaws.com/ImageMagick-$IM_VERSION-$IM_BUILD.tar.gz"
 puts-step "Bundling ImageMagick version $IM_VERSION"
 curl --silent --max-time 120 --location "$IM_URL" | tar xz
 
@@ -46,10 +47,15 @@ UFRAW_URL="https://assets.tandemstock.com.s3.amazonaws.com/ufraw-0.19.tar.gz"
 puts-step "Bundling ufraw version $UFRAW_VERSION"
 curl --silent --max-time 60 --location "$UFRAW_URL" | tar xz -C $IM_LOCATION
 
-# remove imagemagick from gems cache
-rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/gems/rmagick-*
-rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/cache/rmagick-*
-rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/specifications/rmagick-*
+
+if [ ! -f $DIR/vendor/bundle/ruby/1.9.1/cache/$IM_VERSION-$IM_BUILD ];
+  # remove imagemagick from gems cache
+  rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/gems/rmagick-*
+  rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/cache/rmagick-*
+  rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/specifications/rmagick-*
+
+  touch $DIR/vendor/bundle/ruby/1.9.1/cache/$IM_VERSION-$IM_BUILD
+fi
 
 echo "export PATH=$BUILD_DIR/bin:/app/vendor/imagemagick/bin:/app/vendor/imagemagick/im/bin:$PATH
 export CPPFLAGS=\"-fopenmp -I$BUILD_DIR/vendor/imagemagick/include/ImageMagick-6 $CPPFLAGS\"
