@@ -30,7 +30,7 @@ IM_LOCATION="im"
 mkdir -p $IM_LOCATION
 
 # Install ImageMagick
-IM_VERSION="6.8.6-6"
+IM_VERSION="6.8.6"
 IM_BUILD="1"
 IM_URL="http://jpm-guides-staging.s3.amazonaws.com/ImageMagick-$IM_VERSION-$IM_BUILD.tar.gz"
 puts-step "Bundling ImageMagick version $IM_VERSION"
@@ -48,19 +48,32 @@ puts-step "Bundling ufraw version $UFRAW_VERSION"
 curl --silent --max-time 60 --location "$UFRAW_URL" | tar xz -C $IM_LOCATION
 
 
-if [ ! -f $DIR/vendor/bundle/ruby/1.9.1/cache/$IM_VERSION-$IM_BUILD ];
-  # remove imagemagick from gems cache
-  rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/gems/rmagick-*
-  rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/cache/rmagick-*
-  rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/specifications/rmagick-*
+if grep --quiet rmagick $BUILD_DIR/Gemfile $BUILD_DIR/Gemfile.lock; then
+  puts-step 'RMagick detected'
+  if [ ! -f $CACHE_DIR//vendor/bundle/ruby/1.9.1/cache/$IM_VERSION-$IM_BUILD ]; then
+    puts-step "Preparing RMagick to be reinstalled if necessary"
+    # remove imagemagick from gems cache
+    rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/gems/rmagick-*
+    rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/cache/rmagick-*
+    rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/specifications/rmagick-*
 
-  touch $DIR/vendor/bundle/ruby/1.9.1/cache/$IM_VERSION-$IM_BUILD
+    touch $CACHE_DIR//vendor/bundle/ruby/1.9.1/cache/$IM_VERSION-$IM_BUILD
+  fi
+else
+  puts-step 'RMagick not detected'
 fi
 
-echo "export PATH=$BUILD_DIR/bin:/app/vendor/imagemagick/bin:/app/vendor/imagemagick/im/bin:$PATH
-export CPPFLAGS=\"-fopenmp -I$BUILD_DIR/vendor/imagemagick/include/ImageMagick-6 $CPPFLAGS\"
-export LDFLAGS=\"-L$BUILD_DIR/vendor/imagemagick/lib $LDFLAGS\"" > $ROOT_DIR/.set_env
+echo "export PATH=$BUILD_DIR/bin:$BUILD_DIR/vendor/imagemagick/bin:$BUILD_DIR/vendor/imagemagick/im/bin:$PATH
+export CFLAGS=\"-fopenmp -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -I$BUILD_DIR/vendor/imagemagick/include/ImageMagick-6\"
+export CPPFLAGS=\"-fopenmp -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16 -I$BUILD_DIR/vendor/imagemagick/include/ImageMagick-6\"
+export LDFLAGS=\"-L$BUILD_DIR/vendor/imagemagick/lib -lMagickCore-6.Q16 $LDFLAGS\"
+export LIBS=\"-L$BUILD_DIR/vendor/imagemagick/lib -lMagickCore-6.Q16 $LIBS\"
+export LD_LIBRARY_PATH=$BUILD_DIR/vendor/imagemagick/lib/
+export PKG_CONFIG_PATH=$BUILD_DIR/vendor/imagemagick/lib/pkgconfig/" > $ROOT_DIR/.set_env
 
 mkdir -p $BUILD_DIR/.profile.d
 echo "export PATH=:/app/vendor/imagemagick/bin:/app/vendor/imagemagick/im/bin:$PATH
-export LD_LIBRARY_PATH=/app/vendor/imagemagick/lib/" > $BUILD_DIR/.profile.d/imagemagick.sh
+export LD_LIBRARY_PATH=/app/vendor/imagemagick/lib/
+export LD_RUN_PATH=/app/vendor/imagemagick/lib
+export PKG_CONFIG_PATH=/app/vendor/imagemagick/lib/pkgconfig/
+export DYLD_LIBRARY_PATH=app/vendor/imagemagick/lib/" > $BUILD_DIR/.profile.d/imagemagick.sh
