@@ -31,7 +31,7 @@ mkdir -p $IM_LOCATION
 
 # Install ImageMagick
 IM_VERSION="6.8.6"
-IM_BUILD="2"
+IM_BUILD="3"
 IM_URL="http://jpm-guides-staging.s3.amazonaws.com/ImageMagick-$IM_VERSION-$IM_BUILD.tar.gz"
 puts-step "Bundling ImageMagick version $IM_VERSION"
 curl --silent --max-time 120 --location "$IM_URL" | tar xz
@@ -76,4 +76,4 @@ echo "export PATH=:/app/vendor/imagemagick/bin:/app/vendor/imagemagick/im/bin:$P
 export LD_LIBRARY_PATH=/app/vendor/imagemagick/lib/
 export LD_RUN_PATH=/app/vendor/imagemagick/lib
 export PKG_CONFIG_PATH=/app/vendor/imagemagick/lib/pkgconfig/
-export DYLD_LIBRARY_PATH=app/vendor/imagemagick/lib/" > $BUILD_DIR/.profile.d/imagemagick.sh
+export DYLD_LIBRARY_PATH=/app/vendor/imagemagick/lib/" > $BUILD_DIR/.profile.d/imagemagick.sh
