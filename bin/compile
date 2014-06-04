@@ -43,7 +43,7 @@ ln -s ../vendor/imagemagick/bin/Magick-config $BUILD_DIR/bin/Magick-config
 
 # ufraw dependency
 UFRAW_VERSION="0.19"
-UFRAW_URL="https://assets.tandemstock.com.s3.amazonaws.com/ufraw-0.19.tar.gz"
+UFRAW_URL="https://jpm-guides-staging.s3.amazonaws.com/ufraw-0.19.tar.gz"
 puts-step "Bundling ufraw version $UFRAW_VERSION"
 curl --silent --max-time 60 --location "$UFRAW_URL" | tar xz -C $IM_LOCATION
 
