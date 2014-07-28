@@ -57,6 +57,7 @@ if grep --quiet rmagick $BUILD_DIR/Gemfile $BUILD_DIR/Gemfile.lock; then
     rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/cache/rmagick-*
     rm -rf $CACHE_DIR//vendor/bundle/ruby/1.9.1/specifications/rmagick-*
 
+    mkdir -p $CACHE_DIR//vendor/bundle/ruby/1.9.1/cache
     touch $CACHE_DIR//vendor/bundle/ruby/1.9.1/cache/$IM_VERSION-$IM_BUILD
   fi
 else
